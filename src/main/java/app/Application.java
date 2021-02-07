@@ -74,7 +74,7 @@ public class Application {
 
 		staticFiles.location("/public");
 		staticFiles.expireTime(600L);
-		enableDebugScreen(); //ver una pantalla con detalle en caso de error
+		//enableDebugScreen(); //ver una pantalla con detalle en caso de error
 
 		// Filtro aplicado antes de get y post
 		before("*", Filters.handleLocaleChange);
