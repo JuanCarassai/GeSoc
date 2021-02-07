@@ -1,1 +1,1 @@
-web: java $PORT -jar target/GeSoc-0.0.1-SNAPSHOT.jar
+web: java $JAVA_OPTS $PORT -cp target/classes:target/dependency/* app.Application
