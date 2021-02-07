@@ -42,7 +42,8 @@ public class Application {
 //		}
         
         // Configuracion Spark
-        port(getHerokuAssignedPort());
+        //port(getHerokuAssignedPort());
+        port(port);
         staticFiles.location("/public");
         staticFiles.expireTime(600L);
         enableDebugScreen(); //ver una pantalla con detalle en caso de error
