@@ -116,11 +116,7 @@
 			<version>2.9.3</version>
 		</dependency>
 		<!--algunas herramientas utiles para desarrollo -->
-		<dependency>
-			<groupId>com.sparkjava</groupId>
-			<artifactId>spark-debug-tools</artifactId>
-			<version>0.5</version>
-		</dependency>
+
 		<!--templating para vista (html) -->
 		<dependency>
 			<groupId>com.sparkjava</groupId>
