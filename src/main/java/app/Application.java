@@ -30,6 +30,7 @@ import persistencia.BDUtils;
 public class Application {
 
     public static void main(String[] args) {
+    	int PUERTO = getHerokuAssignedPort();
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
         ListaAPI.getInstance().agregarElementosAPI();
@@ -39,7 +40,7 @@ public class Application {
 //		} catch (SchedulerException e) {
 //			e.printStackTrace();
 //		}
-        int PUERTO = getHerokuAssignedPort();
+        
         // Configuracion Spark
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("----------------------------------------------------------------------------");
