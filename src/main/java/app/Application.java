@@ -27,6 +27,15 @@ public class Application {
 
     public static void main(String[] args) {
     	int PUERTO = getHerokuAssignedPort();
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+    	System.out.println("PUERTO LEIDO "+PUERTO);
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
 //        EntityManager em = BDUtils.getEntityManager();
 //        BDUtils.comenzarTransaccion(em);
 //        ListaAPI.getInstance().agregarElementosAPI();
