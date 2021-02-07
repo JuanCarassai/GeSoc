@@ -8,10 +8,6 @@ import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 //import static spark.debug.DebugScreen.enableDebugScreen;
 
-import javax.persistence.EntityManager;
-
-import com.API.ListaAPI;
-
 import controllers.AsociacionesController;
 import controllers.AuditoriaController;
 import controllers.CompraController;
@@ -24,8 +20,6 @@ import controllers.MensajesController;
 import controllers.PresupuestoController;
 import controllers.ProductoController;
 import controllers.ProyectoController;
-import persistencia.BDUtils;
-
 public class Application {
 
 	public static void main(String[] args) {
