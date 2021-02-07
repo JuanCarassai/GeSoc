@@ -9,9 +9,6 @@ import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
-import javax.persistence.EntityManager;
-
-import com.API.ListaAPI;
 
 import controllers.AsociacionesController;
 import controllers.AuditoriaController;
@@ -25,7 +22,7 @@ import controllers.MensajesController;
 import controllers.PresupuestoController;
 import controllers.ProductoController;
 import controllers.ProyectoController;
-import persistencia.BDUtils;
+
 
 public class Application {
 
