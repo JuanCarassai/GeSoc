@@ -6,7 +6,7 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
-import static spark.debug.DebugScreen.enableDebugScreen;
+//import static spark.debug.DebugScreen.enableDebugScreen;
 
 import javax.persistence.EntityManager;
 
