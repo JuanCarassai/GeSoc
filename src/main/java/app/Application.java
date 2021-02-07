@@ -30,7 +30,6 @@ import persistencia.BDUtils;
 public class Application {
 
     public static void main(String[] args) {
-    	int port = 5020;
         EntityManager em = BDUtils.getEntityManager();
         BDUtils.comenzarTransaccion(em);
         ListaAPI.getInstance().agregarElementosAPI();
@@ -40,7 +39,7 @@ public class Application {
 //		} catch (SchedulerException e) {
 //			e.printStackTrace();
 //		}
-        
+        int PUERTO = getHerokuAssignedPort();
         // Configuracion Spark
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("----------------------------------------------------------------------------");
@@ -65,7 +64,7 @@ public class Application {
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("----------------------------------------------------------------------------");
         System.out.println("----------------------------------------------------------------------------");
-        port(getHerokuAssignedPort());
+        port(PUERTO);
 
         staticFiles.location("/public");
         staticFiles.expireTime(600L);
@@ -100,7 +99,7 @@ public class Application {
         // Filtro aplicado despues de get y post
         after("*",              Filters.addGzipHeader);
         
-        System.out.println("SERVER IS RUNNING IN "+port);
+        System.out.println("SERVER IS RUNNING IN "+PUERTO);
     }
     
     static int getHerokuAssignedPort() {
