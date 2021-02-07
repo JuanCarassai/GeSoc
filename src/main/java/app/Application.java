@@ -7,7 +7,6 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
-import static spark.debug.DebugScreen.enableDebugScreen;
 
 
 import controllers.AsociacionesController;
@@ -66,7 +65,7 @@ public class Application {
 
         staticFiles.location("/public");
         staticFiles.expireTime(600L);
-        enableDebugScreen(); //ver una pantalla con detalle en caso de error
+        //enableDebugScreen(); //ver una pantalla con detalle en caso de error
 
         // Filtro aplicado antes de get y post
         before("*",             Filters.handleLocaleChange);
