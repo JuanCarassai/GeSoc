@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GeSoc - Cargar Compra</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/heroic-features.css" rel="stylesheet">
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-toggler-right navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/inicio">GeSoc</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/inicio">Inicio
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/proyecto">Proyecto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mensajes">Mensajes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Cerrar Sesi&oacute;n</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Cargue sus Compras</h1>
+      <p class="lead">Nuestro sistema Gestor de Proyectos Sociales
+      facilita la carga y gesti&oacute;n de sus compras. </p>
+    </header>
+    
+    <!-- Page Features -->
+    
+    <form method="get">
+    #if($FormatoNumeroCompraIncorrecto)
+		<p>ERROR: EL FORMATO DEL NUMERO DE COMPRA ES INCORRECTO</p>
+	#elseif($NumeroCompraMenorACero)
+		<p>ERROR: EL NUMERO DE COMPRA DEBE SER MAYOR A CERO</p>
+    #elseif($NumeroCompraYaExiste)
+		<p>ERROR: YA EXISTE UNA COMPRA CON EL NUMERO INGRESADO </p>
+	#elseif($FormatoCantidadIncorrecto)
+		<p>ERROR: EL FORMATO DE LA CANTIDAD DE PRESUPUESTOS ES INCORRECTO </p>
+	#elseif($errorElegirCriterio)
+		<p>ERROR: ELIJA UN CRITERIO DE SELECCION </p>
+	#elseif($errorElegirPresupuesto)
+		<p> ERROR: ELIJA AL MENOS UN PRESUPUESTO </p>
+	#elseif($cargaCompraExitosa)
+		<p>EXITO: LA COMPRA FUE CARGADA CORRECTAMENTE.</p>
+		
+	
+    #end
+
+     <div class="form-group">
+      <label for="inputNumeroCompra">N&uacute;mero de compra</label>
+      <input name="compra" type="text" class="form-control" id="inputNumeroCompra" placeholder="N&uacute;mero de compra">
+    </div>
+
+    <div class="form-group">
+      <label for="inputCantidadPresupuestos">Cantidad m&iacute;nima de presupuestos</label>
+      <input name="CantidadPresupuestos" type="text" class="form-control" id="inputCantidadPresupuestos" placeholder="Cantidad de presupuestos">
+    </div>
+
+    <div class="form-group">
+      <label for="inputCriterio">Criterio de selecci&oacute;n de presupuesto</label>
+      <select name="criterioSeleccion" class="form-control">
+       <option value="Ninguno" selected>Ninguno</option>
+       <option value="ProveedorMenorValor">Por menor valor</option>
+     </select>
+   </div>
+
+
+   <div class="form-group">
+    <fieldset disabled>
+      <label for="inputPres">Elegir presupuestos</label>
+      <input type="text" class="form-control" id="inputPres" placeholder="Presupuestos seleccionados">
+    </fieldset>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ventanaAgregarPresupuestos">Agregar</button>
+    <!-- Modal -->
+    <div class="modal fade" id="ventanaAgregarPresupuestos" tabindex="-1" role="dialog" aria-labelledby="modalCargarOperaciones" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" id="modalCargarPresupuestos">Presupuestos disponibles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <ul class="list-group list-group-flush">
+			#foreach($presupuesto in $presupuestos)
+				<li class="list-group-item">
+					<div class="custom-control custom-checkbox">
+						<div class="form-row">
+							<div class="form-group col-md-9">
+								<input name="presupuestosSeleccionados" value="$!presupuesto.getId()" type="checkbox" class="custom-control-input" id="check$!presupuesto.getId()">
+									<label class="custom-control-label" for="check$!presupuesto.getId()">
+										Presupuesto $presupuesto.getId() 
+										#if($presupuesto.getProveedor())
+											Proveedor: $presupuesto.getProveedor().getNombre()
+										#else
+											Proveedor: NO ASIGNADO
+										#end
+									</label>
+                 			</div>
+						</div>
+					</div>
+           		</li>	
+			#end
+
+        </ul>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Seleccionar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>  
+</div> 
+
+
+
+
+
+  <div class="form-group">
+    <fieldset disabled>
+      <label for="inputProds">Elegir productos</label>
+      <input type="text" class="form-control" id="inputProds" placeholder="Productos seleccionados">
+    </fieldset>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ventanaAgregarProductos">Agregar</button>
+    <!-- Modal -->
+    <div class="modal fade" id="ventanaAgregarProductos" tabindex="-1" role="dialog" aria-labelledby="modalCargarOperaciones" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" id="modalCargarProductos">Productos disponibles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <ul class="list-group list-group-flush">
+			
+			#foreach($producto in $productos)
+				<li class="list-group-item">
+					<div class="custom-control custom-checkbox">
+						<div class="form-row">
+							<div class="form-group col-md-9">
+								<input name="productosSeleccionados" value="$!producto.getId()" type="checkbox" class="custom-control-input" id="$!foreach.count">
+									<label class="custom-control-label" for="$!foreach.count">
+										Producto $producto.getId() Descripcion: $producto.getDescripcion() Precio: $producto.getValor()
+									</label>
+                 			</div>
+						</div>
+					</div>
+           		</li>	
+			#end			
+
+          </ul>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Seleccionar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+
+
+  <button onclick="submit" class="btn btn-primary">Cargar</button>
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+</body>
+
+</html>

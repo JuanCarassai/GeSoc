@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GeSoc - Cargar Ingreso</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/heroic-features.css" rel="stylesheet">
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-toggler-right navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/inicio">GeSoc</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/inicio">Inicio
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/proyecto">Proyecto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mensajes">Mensajes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Cerrar Sesi&oacute;n</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">Cargue sus Ingresos</h1>
+      <p class="lead">Nuestro sistema Gestor de Proyectos Sociales
+           facilita la carga y gesti&oacute;n de sus operaciones de ingresos. </p>
+    </header>
+
+    #if($FormatoNumeroIncorrecto)
+		<p>ERROR: EL FORMATO DEL MONTO INGRESADO ES INCORRECTO</p>
+	#elseif($montoMenorACero)
+		<p>ERROR: EL MONTO INGRESADO DEBE SER MAYOR A CERO</p>
+    #elseif($errorFecha)
+		<p>ERROR: LA FECHA ES INCORRECTA </p>
+	#elseif($OperacionIncompleta)
+		<p>ERROR: COMPLETE TODOS LOS CAMPOS</p>
+	#elseif($cargaIngresoExitosa)
+		<p>EXITO: EL EGRESO FUE CARGADO CORRECTAMENTE. EL NUMERO DE INGRESO ES: $numeroIngreso</p>
+    #end
+    <!-- Page Features -->
+
+       <form method="get">
+            <div class="form-group col-md-12">
+                <label for="inputMonto">Monto</label>
+                <input name="MontoTotal" type="text" class="form-control" id="inputMonto" placeholder="Monto">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="inputDescripcion">Descripci&oacute;n</label>
+                <input name="Descripcion"  type="text" class="form-control" id="inputDescripcion" placeholder="Descripci&oacute;n del ingreso">
+            </div>
+          
+           
+              <div class="form-group col-md-12">
+                <label for="inputFechaOperacion">Fecha de operaci&oacute;n</label>
+                <input name="fecha" type="text" class="form-control" id="inputFechaOperacion" placeholder="20/10/2020">
+              </div>
+              <button onclick="submit" class="btn btn-primary">Cargar</button>
+
+        </form>
+
+  </div>
+  
+ <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

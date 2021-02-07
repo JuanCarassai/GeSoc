@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>GeSoc - Cargar Presupuesto</title>
+  
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!-- Custom styles for this template -->
+    <link href="/css/heroic-features.css" rel="stylesheet">
+    
+  
+  </head>
+  
+  <body>
+  
+    <!-- Navigation -->
+    <nav class="navbar navbar-toggler-right navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/inicio">GeSoc</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/inicio">Inicio
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/proyecto">Proyecto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/mensajes">Mensajes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Cerrar Sesi&oacute;n</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <!-- Page Content -->
+    <div class="container">
+
+		
+		
+      <!-- Header -->
+      <header class="jumbotron my-4">
+        <h1 class="display-3">Cargue sus Presupuestos</h1>
+        <p class="lead">Nuestro sistema Gestor de Proyectos Sociales
+             facilita la carga y gesti&oacute;n de sus presupuestos. </p>
+      </header>
+      
+      <!-- Page Features -->
+      
+      <form>
+	#if($FormatoNumeroComprobanteIncorrecto)
+		<p>ERROR: EL FORMATO DEL NUMERO DE DOCUMENTO COMERCIAL ES INCORRECTO</p>
+	#elseif($comprobanteUnSoloDigito)
+		<p>ERROR: EL TIPO DE COMPROBANTE DEBE SER UN CARACTER UNICO</p>
+    #elseif($FormatoNumeroIncorrectoCUITODNI)
+		<p>ERROR: EL FORMATO DEL DNI O CUIT ES INCORRECTO </p>
+	#elseif($PresupuestosNoSeleccionados)
+		<p>ERROR: DEBE SELECCIONAR AL MENOS UN PRESUPUESTO </p>
+	#elseif($cargaCompletada)
+		<p>EXITO: EL PRESUPUESTO FUE CARGADO CORRECTAMENTE. EL IDENTIFICADOR DEL MISMO ES: $idPresupuesto </p>
+    #end  
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="inputComprobante">Numero Documento Comercial</label>
+				<input name="numeroComprobante" type="text" class="form-control" id="inputComprobante" placeholder="Numero Comprobante">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="inputComprobante">Tipo Documento Comercial</label>
+				<input name="tipoComprobante" type="text" class="form-control" id="inputComprobante" placeholder="Tipo Comprobante">
+            </div>
+	    </div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="inputProveedor">Nombre Proveedor</label>
+                <input name="nombreProveedor" type="text" class="form-control" id="inputProveedor" placeholder="Nombre Proveedor">
+            </div>
+			<div class="form-group col-md-6">
+                <label for="inputProveedor">DNI o CUIT del Proveedor</label>
+                <input name="DNIoCUITprov" type="text" class="form-control" id="inputProveedor" placeholder="DNI o CUIT del Proveedor">
+            </div>
+		</div>
+		
+		
+        <div class="form-row">
+            <label for="inputDocComercial">Presupuesto detallado</label>
+            <input type="text" class="form-control" id="inputDocComercial" placeholder="Lista de documentos comerciales">
+             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ventanaDocumentoComercial">Ver</button>
+            <!-- Modal -->
+           <div class="modal fade" id="ventanaDocumentoComercial" tabindex="-1" role="dialog" aria-labelledby="modalDocumentoComercial" aria-hidden="true">
+             <div class="modal-dialog modal-dialog-centered" role="document">
+               <div class="modal-content">
+                 <div class="modal-header">
+                  
+                   <h5 class="modal-title" id="modalCargarProductos">Presupuestos detallados:</h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                 </div>
+
+          <ul class="list-group list-group-flush">
+			#foreach($presupuesto in $presupuestos)
+				<li class="list-group-item">
+					<div class="custom-control custom-checkbox">
+						<div class="form-row">
+							<div class="form-group col-md-9">
+								<input name="presupuestosSeleccionados" value="$!presupuesto.getId()" type="checkbox" class="custom-control-input" id="check$!presupuesto.getId()">
+									<label class="custom-control-label" for="check$!presupuesto.getId()">
+										Presupuesto $presupuesto.getId() Precio: $presupuesto.getPrecio() Producto: $presupuesto.getProductoCompra().getDescripcion()
+									</label>
+                 			</div>
+						</div>
+					</div>
+           		</li>	
+			#end
+
+        </ul>
+                   
+                   <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                   <button type="button" class="btn btn-primary" data-dismiss="modal">Seleccionar</button>
+                   </div>
+                 </div>
+               </div>
+             </div>
+        </div>
+
+					  <div class="form-group">
+    <fieldset disabled>
+      <label for="inputMoneda">Moneda</label>
+      <input type="text" class="form-control" id="inputMoneda" placeholder="Moneda elegida">
+    </fieldset>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ventanaAgregarMoneda">Ver</button>
+    <!-- Modal -->
+    <div class="modal fade" id="ventanaAgregarMoneda" tabindex="-1" role="dialog" aria-labelledby="modalCargarMoneda" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" id="modalCargarMoneda">Monedas disponibles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+		  
+          <div class="col-sm-10">
+			#foreach($moneda in $monedas)
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="moneda_query" value="$!moneda.getId_moneda()" id="$!moneda.getId_moneda()" checked>
+              <label class="form-check-label" for="$!moneda.getId_moneda()">
+				$moneda.getDescription()		
+              </label>
+            </div>
+		    #end
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Seleccionar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  			  <div class="form-group">
+    <fieldset disabled>
+      <label for="inputPais">Pais</label>
+      <input type="text" class="form-control" id="inputPais" placeholder="Pais elegido">
+    </fieldset>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ventanaAgregarPais">Ver</button>
+    <!-- Modal -->
+    <div class="modal fade" id="ventanaAgregarPais" tabindex="-1" role="dialog" aria-labelledby="modalCargarPais" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" id="modalCargarPais">Paises disponibles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+		  
+          <div class="col-sm-10">
+			#foreach($pais in $paises)
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="pais_query" value="$!pais.getId_pais()" id="$!pais.getId_pais()" checked>
+              <label class="form-check-label" for="$!pais.getId_pais()">
+				$pais.getName()		
+              </label>
+            </div>
+		    #end
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Seleccionar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+		
+		<button type="submit" class="btn btn-primary">Cargar</button>
+    </form>
+     </div>  
+
+  
+  </body>
+  
+  </html>

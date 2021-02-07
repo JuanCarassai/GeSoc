@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>GeSoc - Auditoria</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/heroic-features.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-toggler-right navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/inicio">GeSoc</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/inicio">Inicio
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/proyecto">Proyecto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mensajes">Mensajes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Cerrar Sesi&oacute;n</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Header -->
+    <header class="jumbotron my-4">
+    <h1 class="display-3">Bienvenido a sus Auditor&iacute;as de GeSoc</h1>
+    <p class="lead"> Acceda a las operaciones registradas, seleccionando el tipo de operaci&oacute;n y la entidad sobre la que ocurri&oacute;. </p>
+    </header>
+  </div>
+  <form method="get">	
+  <div class="container">
+    <div class="row">
+      <div class="form-group col-md-4">
+       <select name="Operaciones" class="form-control">
+        <option selected disabled>Operaciones</option>
+		<option value="Categoria">Categoria</option>
+		<option value="Ciudad">Ciudad</option>
+		<option value="Compra">Compra</option>
+		<option value="CriterioCategorizacion">Criterio Categorizacion</option>
+		<option value="Direccion">Direccion</option>
+		<option value="DocumentoComercial">Documento Comercial</option>
+		<option value="Empresa">Tipo Entidad Empresa</option>
+		<option value="EntidadBase">Entidad Base</option>
+		<option value="EntidadJuridica">Entidad Juridica</option>
+		<option value="MedianaTramo1">Mediana Tramo 1</option>
+		<option value="MedianaTramo2">Mediana Tramo 2</option>
+		<option value="MedioDePago">Medio De Pago</option>
+		<option value="Mensaje">Mensaje</option>
+		<option value="Micro">Micro</option>
+		<option value="Moneda">Moneda</option>
+		<option value="OperacionEgreso">Operacion Egreso</option>
+		<option value="OperacionIngreso">Operacion Ingreso</option>
+		<option value="Organizacion">Organizacion</option>
+		<option value="OSC">Tipo Entidad OSC</option>
+		<option value="Pais">Pais</option>
+		<option value="Pequenia">Peque&ntilde;a</option>
+		<option value="PresupuestoDetallado">Presupuesto Detallado</option>
+		<option value="Presupuesto">Presupuesto</option>
+		<option value="Producto">Producto</option>
+		<option value="Proveedor">Proveedor</option>
+		<option value="Provincia">Provincia</option>
+		<option value="ProyectoDeFinanciacion">Proyecto De Financiacion</option>
+		<option value="Usuario">Usuario</option>
+          </select>
+      </div>
+
+      <div class="form-group col-md-4">
+       <select name="TipoOperacion" class="form-control">
+          <option selected disabled>Tipo Operacion</option>
+		  <option value="ALTA">ALTA</option>
+		  <option value="BAJA">BAJA</option>
+		  <option value="MODIFICACION">MODIFICACION</option>
+	   </select>
+	  </div>
+
+      <div class="form-group col-md-4">
+      <button onclick="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </div>
+		
+		<ul class="list-group">
+		#foreach($logDocumento in $logsDocumentos)
+			<li class="list-group-item">
+				$logDocumento.get($fecha)
+				$logDocumento.get($tipoOperacion)
+				$logDocumento.get($entidadAfectada)
+			</li>
+		#end
+		</ul>
+	
+	</div>
+
+	
+
+	</form>	
+	
+<!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
