@@ -1,1 +1,1 @@
-web: java $PORT -cp target/classes/:target/dependency/* app.Application
+web: java -Dserver.port=$PORT -cp target/classes/:target/dependency/* app.Application
