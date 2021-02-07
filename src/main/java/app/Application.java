@@ -5,7 +5,8 @@ import static spark.Spark.before;
 import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
-import static spark.Spark.staticFiles;
+
+import spark.Spark;
 
 import controllers.AsociacionesController;
 import controllers.AuditoriaController;
@@ -65,8 +66,8 @@ public class Application {
 		System.out.println("----------------------------------------------------------------------------");
 		port(PUERTO);
 
-		staticFiles.location("/public");
-		staticFiles.expireTime(600L);
+		Spark.staticFiles.location("/public");
+		Spark.staticFiles.expireTime(600L);
 		//enableDebugScreen(); //ver una pantalla con detalle en caso de error
 
 		// Filtro aplicado antes de get y post
